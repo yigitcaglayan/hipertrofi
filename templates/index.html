@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hipertrofi - İnteraktif Kas Antrenman Rehberi</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">HIPERTROFI</span>
+            </div>
+            <nav class="nav">
+                <!-- Auth Buttons -->
+                <div id="auth-buttons" style="display: flex; align-items: center; gap: 1rem;">
+                    <span id="user-greeting" style="display: none; color: white;">Merhaba, <span
+                            id="username-display"></span></span>
+                    <button class="nav-link video-link" id="loginBtn"
+                        style="background: transparent; border: 1px solid #ffffff; padding: 0.5rem 1.5rem; border-radius: 8px; color: white; cursor: pointer;">Sporcu
+                        Girişi</button>
+                    <button class="nav-link video-link" id="logoutBtn"
+                        style="display: none; background: #000000; border: 1px solid #ffffff; padding: 0.5rem 1.5rem; border-radius: 8px; color: #ffffff; cursor: pointer;">Çıkış</button>
+                </div>
+                <a href="#home" class="nav-link active">Ana Sayfa</a>
+                <a href="#guide" class="nav-link">Kullanım Kılavuzu</a>
+                <a href="#about" class="nav-link">Hakkında</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <span class="title-line" style="color: #ffffff;">Kaslarınızı</span>
+                    <span class="title-line highlight"
+                        style="background: linear-gradient(135deg, #e63946 0%, #ff4757 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Keşfedin</span>
+                </h1>
+                <p class="hero-subtitle">
+                    İnteraktif vücut modeli ile her kas grubuna özel en etkili
+                    5 egzersizi keşfedin. Profesyonel antrenman rehberiniz her zaman yanınızda.
+                </p>
+
+                <!-- Hero Buttons -->
+                <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 2rem;">
+                    <button id="favoritesBtn" class="program-btn" style="
+                        background: rgba(255, 255, 255, 0.1);
+                        border: 1px solid #ffffff;
+                        color: #ffffff;
+                        padding: 1rem 2rem;
+                        border-radius: 12px;
+                        font-family: 'Oswald', sans-serif;
+                        font-size: 1.2rem;
+                        cursor: pointer;
+                        display: flex;
+                        align-items: center;
+                        gap: 1rem;
+                        transition: all 0.3s ease;
+                        backdrop-filter: blur(5px);
+                    ">
+                        <span style="font-size: 1.5rem;">❤️</span>
+                        Favorilerim
+                    </button>
+                </div>
+
+                <!-- Features (Restored) -->
+                <div class="hero-features">
+                    <div class="feature-item">
+                        <span class="feature-icon">🎯</span>
+                        <span>Hedefli Antrenman</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">📊</span>
+                        <span>Detaylı Açıklamalar</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">⚡</span>
+                        <span>Hızlı Erişim</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="{{ url_for('static', filename='images/hero_logo.jpg') }}" alt="Hipertrofi Logo"
+                    style="width: 100%; max-width: 500px; height: auto; border-radius: 20px; box-shadow: 0 20px 60px rgba(255, 0, 0, 0.3);">
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- View Toggle -->
+        <div class="view-toggle-container" style="background: transparent; padding: 2rem 0;">
+            <h2 class="section-title" style="color: #ffffff; font-size: 2.5rem; font-weight: 700;">Vücut Modelini Keşfet
+            </h2>
+            <p class="section-description">
+                Çalışmak istediğiniz kas grubuna tıklayın ve size özel egzersizleri görün.
+                Ön ve arka görünümler arasında geçiş yaparak tüm kas gruplarına erişebilirsiniz.
+            </p>
+            <div class="view-toggle">
+                <button class="toggle-btn active" data-view="front"
+                    style="padding: 1rem 2rem; background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%); color: #000000; border: none; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);">
+                    <span class="btn-icon">👤</span>
+                    <span class="btn-text">Ön Görünüm</span>
+                </button>
+                <button class="toggle-btn" data-view="back"
+                    style="padding: 1rem 2rem; background: linear-gradient(135deg, #e63946 0%, #ff4757 100%); color: #ffffff; border: none; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);">
+                    <span class="btn-icon">🔄</span>
+                    <span class="btn-text">Arka Görünüm</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Body Visualization Container -->
+        <div class="body-container">
+            <div class="body-wrapper">
+                <!-- SVG Body Model -->
+                <!-- Main Body Image -->
+                <svg id="bodyModel" width="100%" height="auto" viewBox="0 0 400 800" class="body-svg"
+                    preserveAspectRatio="xMidYMid meet">
+                    <defs>
+                        <filter id="glow">
+                            <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+                            <feMerge>
+                                <feMergeNode in="coloredBlur" />
+                                <feMergeNode in="SourceGraphic" />
+                            </feMerge>
+                        </filter>
+                    </defs>
+
+                    <!-- Front View Interactive Layer - Precisely Calibrated -->
+                    <g id="frontView" class="body-view active">
+                        <!-- Front Body Image -->
+                        <image href="/static/images/body_front.png" x="0" y="0" width="400" height="800"
+                            preserveAspectRatio="xMidYMid meet" />
+                        <!-- Omuzlar (Deltoids) - Exact coordinates -->
+                        <path id="muscle-7"
+                            d="M100,187 Q76,195 71,215 Q68,230 73,242 Q80,248 90,245 Q98,235 101,225 Q103,210 100,187 Z"
+                            class="muscle-area" data-muscle="7" data-name="Sol Omuz" />
+                        <path id="muscle-8"
+                            d="M235,191 Q250,195 255,210 Q258,225 253,237 Q246,243 236,240 Q228,230 228,220 Q227,205 235,191 Z"
+                            class="muscle-area" data-muscle="8" data-name="Sağ Omuz" />
+
+                        <!-- Göğüs (Pectoralis) - Centered on chest -->
+                        <path id="muscle-1" d="M115,190 Q170,200 225,190 L220,255 Q170,265 120,255 Z"
+                            class="muscle-area" data-muscle="1" data-name="Göğüs" />
+
+                        <!-- Biceps - Exact coordinates -->
+                        <path id="muscle-2"
+                            d="M72,256 Q85,240 100,227 Q105,235 104,243 Q95,270 84,295 Q78,300 73,304 Q70,295 72,256 Z"
+                            class="muscle-area" data-muscle="2" data-name="Sol Biceps" />
+                        <path id="muscle-3"
+                            d="M225,235 Q235,250 245,293 Q250,298 253,301 Q258,295 260,290 Q258,270 253,257 Q240,240 225,235 Z"
+                            class="muscle-area" data-muscle="3" data-name="Sağ Biceps" />
+
+                        <!-- Karın (Abs) - Exact coordinates -->
+                        <path id="muscle-4" d="M112,270 L214,271 L203,349 L111,348 Z" class="muscle-area"
+                            data-muscle="4" data-name="Karın" />
+
+                        <!-- Ön Bacak (Quadriceps) - Exact coordinates -->
+                        <path id="muscle-5"
+                            d="M85,410 Q100,415 141,425 Q135,490 127,557 Q110,555 93,545 Q88,475 85,410 Z"
+                            class="muscle-area" data-muscle="5" data-name="Sol Ön Bacak" />
+                        <path id="muscle-6"
+                            d="M155,431 Q185,422 219,419 Q225,480 230,548 Q215,558 197,561 Q175,495 155,431 Z"
+                            class="muscle-area" data-muscle="6" data-name="Sağ Ön Bacak" />
+                    </g>
+
+                    <!-- Back View Interactive Layer - Hidden by default -->
+                    <g id="backView" class="body-view">
+                        <!-- Back Body Image -->
+                        <image href="/static/images/body_back.png" x="0" y="0" width="400" height="800"
+                            preserveAspectRatio="xMidYMid meet" />
+
+                        <!-- Sırt (Back) - Positioned on upper/mid back -->
+                        <path id="muscle-9" d="M145,195 Q200,215 255,195 L250,345 Q200,365 150,345 Z"
+                            class="muscle-area" data-muscle="9" data-name="Sırt" />
+
+
+                        <!-- Arka Kol (Triceps) - Positioned on back of upper arms -->
+                        <path id="muscle-10" d="M110,210 Q100,240 110,270 Q125,260 130,225 Z" class="muscle-area"
+                            data-muscle="10" data-name="Sol Triceps" />
+                        <path id="muscle-11" d="M290,210 Q300,240 290,270 Q275,260 270,225 Z" class="muscle-area"
+                            data-muscle="11" data-name="Sağ Triceps" />
+
+                        <!-- Kalça (Glutes) - Shorter and wider -->
+                        <path id="muscle-12" d="M155,355 Q200,365 245,355 L240,420 Q200,430 160,420 Z"
+                            class="muscle-area" data-muscle="12" data-name="Kalça" />
+
+                        <!-- Arka Bacak (Hamstrings) - Much shorter -->
+                        <path id="muscle-13" d="M145,430 Q135,500 150,570 Q180,580 195,570 Q205,500 190,430 Z"
+                            class="muscle-area" data-muscle="13" data-name="Sol Arka Bacak" />
+                        <path id="muscle-14" d="M255,430 Q265,500 250,570 Q220,580 205,570 Q195,500 210,430 Z"
+                            class="muscle-area" data-muscle="14" data-name="Sağ Arka Bacak" />
+
+                        <!-- Baldır (Calves) - Shorter and raised -->
+                        <path id="muscle-15" d="M145,580 Q135,630 150,680 Q170,685 180,680 Q190,630 175,580 Z"
+                            class="muscle-area" data-muscle="15" data-name="Sol Baldır" />
+                        <path id="muscle-16" d="M255,580 Q265,630 250,680 Q230,685 220,680 Q210,630 225,580 Z"
+                            class="muscle-area" data-muscle="16" data-name="Sağ Baldır" />
+                    </g>
+                </svg>
+
+                <!-- Hover Info -->
+                <div id="hoverInfo" class="hover-info">
+                    <span class="hover-text"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exercise Panel -->
+        <div id="exercisePanel" class="exercise-panel">
+            <div class="panel-header">
+                <h3 id="muscleName" class="panel-title"></h3>
+                <button id="closePanel" class="close-btn">&times;</button>
+            </div>
+            <div class="panel-content" id="exerciseList">
+                <!-- Egzersizler dinamik olarak buraya yüklenecek -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Guide Section -->
+    <section id="guide" class="guide-section">
+        <div class="guide-content">
+            <h2 class="guide-title">Nasıl Kullanılır?</h2>
+            <div class="guide-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Görünüm Seçin</h3>
+                        <p>Ön veya arka görünüm butonlarıyla vücudun istediğiniz tarafını görüntüleyin.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Kas Seçin</h3>
+                        <p>Çalışmak istediğiniz kas grubunun üzerine gelin ve tıklayın.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Egzersizleri Keşfedin</h3>
+                        <p>Tıkladığınız kas için en etkili 5 egzersizi detaylı açıklamalarıyla inceleyin.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" style="background: #1a1a1a !important; border-top: 2px solid #ffffff;">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4 style="color: #ffffff;">Hipertrofi</h4>
+                <p style="margin-bottom: 1rem; font-weight: 600; color: var(--accent-blue);">Kas Büyütmenin Formülü:
+                    Hipertrofi 🧬</p>
+                <p style="line-height: 1.8; margin-bottom: 1rem;">Kasların sadece salonda değil, doğru bir sistemle
+                    büyür. İşte o süreç:</p>
+                <p style="margin-left: 1rem; line-height: 1.8;">
+                    <strong style="color: var(--accent-blue);">Zorla:</strong> Doğru ağırlıkla kas liflerini uyar.<br>
+                    <strong style="color: var(--accent-blue);">Besle:</strong> Proteinle onarımı başlat.<br>
+                    <strong style="color: var(--accent-blue);">Dinlendir:</strong> Kasların sen uyurken büyüsün.
+                </p>
+                <p style="margin-top: 1rem; line-height: 1.8;">
+                    Boş tekrarlarla vakit kaybetme!
+                </p>
+                <p style="margin-top: 0.5rem; color: var(--accent-blue); font-weight: 600;">
+                    👉 Bilimsel olarak en verimli şekilde antrenman için sayfamızı kullanabilirsiniz.
+                </p>
+            </div>
+            <div class="footer-section">
+                <h4>Özellikler</h4>
+                <ul>
+                    <li>İnteraktif Vücut Modeli</li>
+                    <li>16+ Kas Grubu</li>
+                    <li>80+ Egzersiz</li>
+                    <li>Detaylı Açıklamalar</li>
+                    <li>Bilimsel Hipertrofi Yaklaşımı</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4 style="color: #ffffff;">İletişim</h4>
+                <p
+                    style="background: linear-gradient(135deg, #e63946 0%, #ff4757 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 700; font-size: 1.1rem; margin-bottom: 1rem;">
+                    Created by Alperen Topcu and M.Yiğit Çağlayan
+                </p>
+                <p style="color: #ffffff;">Her türlü soru ve öneriniz için bizimle iletişime geçebilirsiniz.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Hipertrofi. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center;">
+        <div class="modal-content"
+            style="background: rgba(30,30,30,0.9); backdrop-filter: blur(10px); padding: 2rem; border-radius: 15px; border: 1px solid white; width: 90%; max-width: 400px; position: relative;">
+            <span class="close-modal"
+                style="position: absolute; top: 10px; right: 15px; color: white; cursor: pointer; font-size: 1.5rem;">&times;</span>
+            <h2 style="color: white; font-family: 'Oswald', sans-serif; margin-bottom: 2rem; text-align: center;">Giriş
+                Yap</h2>
+            <form id="loginForm">
+                <div style="margin-bottom: 1rem;">
+                    <input type="text" id="loginIdentifier" placeholder="Kullanıcı Adı veya Email" required
+                        style="width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid #444; background: rgba(255,255,255,0.1); color: white;">
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <input type="password" id="loginPassword" placeholder="Şifre" required
+                        style="width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid #444; background: rgba(255,255,255,0.1); color: white;">
+                </div>
+                <button type="submit"
+                    style="width: 100%; padding: 1rem; background: #e63946; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 1rem;">GİRİŞ
+                    YAP</button>
+            </form>
+            <p style="color: #bbb; text-align: center; margin-top: 1rem;">
+                Hesabın yok mu? <a href="#" id="openRegisterLink" style="color: #e63946;">Kayıt Ol</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center;">
+        <div class="modal-content"
+            style="background: rgba(30,30,30,0.9); backdrop-filter: blur(10px); padding: 2rem; border-radius: 15px; border: 1px solid white; width: 90%; max-width: 400px; position: relative;">
+            <span class="close-modal"
+                style="position: absolute; top: 10px; right: 15px; color: white; cursor: pointer; font-size: 1.5rem;">&times;</span>
+            <h2 style="color: white; font-family: 'Oswald', sans-serif; margin-bottom: 2rem; text-align: center;">Kayıt
+                Ol</h2>
+            <form id="registerForm">
+                <div style="margin-bottom: 1rem;">
+                    <input type="text" id="regUsername" placeholder="Kullanıcı Adı" required
+                        style="width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid #444; background: rgba(255,255,255,0.1); color: white;">
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <input type="email" id="regEmail" placeholder="Email Adresi" required
+                        style="width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid #444; background: rgba(255,255,255,0.1); color: white;">
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <input type="password" id="regPassword" placeholder="Şifre" required
+                        style="width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid #444; background: rgba(255,255,255,0.1); color: white;">
+                </div>
+                <button type="submit"
+                    style="width: 100%; padding: 1rem; background: #e63946; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 1rem;">KAYIT
+                    OL</button>
+            </form>
+            <p style="color: #bbb; text-align: center; margin-top: 1rem;">
+                Zaten hesabın var mı? <a href="#" id="openLoginLink" style="color: #e63946;">Giriş Yap</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Favorites Modal -->
+    <div id="favoritesModal" class="modal"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center;">
+        <div class="modal-content"
+            style="background: rgba(30,30,30,0.95); backdrop-filter: blur(10px); padding: 2rem; border-radius: 15px; border: 1px solid white; width: 90%; max-width: 600px; height: 70vh; position: relative; display: flex; flex-direction: column;">
+            <span class="close-modal"
+                style="position: absolute; top: 10px; right: 15px; color: white; cursor: pointer; font-size: 1.5rem;">&times;</span>
+            <h2 style="color: white; font-family: 'Oswald', sans-serif; margin-bottom: 1.5rem; text-align: center;">
+                Favorilerim</h2>
+            <div id="favoritesList" style="flex: 1; overflow-y: auto; padding-right: 10px;">
+                <!-- Favorites items will be injected here -->
+                <p style="color: #bbb; text-align: center;">Henüz favori eklenmemiş.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>
