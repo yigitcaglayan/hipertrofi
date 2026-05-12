@@ -6,11 +6,10 @@
 
 ## 📸 Ekran Görüntüleri
 
-> *(Görseller eklenecek)*
 
 | Ana Sayfa — Kas Haritası | Egzersiz Paneli | Favorilerim |
 |:---:|:---:|:---:|
-| ![Ana Sayfa](screenshots/index.png) | ![Egzersizler](screenshots/exercises.png) | ![Favoriler](screenshots/favorites.png) |
+| ![Ana Sayfa](ana_sayfa.png) | ![Egzersizler](egzersizler.png) | ![Favoriler](favoriler.png) |
 
 ---
 
